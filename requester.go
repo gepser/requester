@@ -6,14 +6,26 @@ import (
 	"net/http"
 )
 
+//Requester struct
+type Requester struct {
+	baseURL string
+}
+
+//NewRequester new instance of Requester
+func NewRequester(url string) *Requester {
+	return &Requester{
+		baseURL: url,
+	}
+}
+
 //Get => does an HTTP get request and expect a 200 status code
-func Get(url string, target interface{}) error {
+func (r *Requester) Get(url string, target interface{}) error {
 	var request *http.Request
 	var response *http.Response
 	var err error
 	client := &http.Client{}
 
-	request, err = http.NewRequest(http.MethodGet, url, nil)
+	request, err = http.NewRequest(http.MethodGet, r.baseURL+url, nil)
 	if err != nil {
 		return err
 	}

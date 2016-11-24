@@ -14,7 +14,7 @@ package main
 import (
     "fmt"
 
-    req "github.com/gepser/requester"
+    "github.com/gepser/requester"
 )
 
 //GithubRootStruct is an example struct to be used to parse the response of the root github api
@@ -53,8 +53,8 @@ type GithubRootStruct struct {
 
 func main() {
     github := &GithubRootStruct{}
-
-    err := req.Get("https://api.github.com/", github)
+    req := requester.NewRequester("https://api.github.com/")
+    err := req.Get("", github)
 
     if err != nil {
         fmt.Println(err)
